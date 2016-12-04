@@ -23,7 +23,7 @@ $(document).ready(function() {
                 console.log(response);
                 $('#gifs-go-here').empty();
                 for (var i = 0; i < response.data.length; i++) {
-                    var topicDiv = $('<div>').addClass('col-sm-3')
+                    var topicDiv = $('<div>').addClass('col-sm-3 innerRows')
                     var p = $('<p>').text(response.data[i].rating);
                     // importing the still url of the image
                     var topicImg = $('<img>').attr('src', response.data[i].images.fixed_height_still.url);
