@@ -3,6 +3,9 @@
 }
 
 .button-style {
-    width: 110px;
     margin: 5px;
+}
+
+#gifs-go-here {
+    width: 100%;
 }

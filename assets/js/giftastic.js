@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    var topics = ['Texas', 'Paris', 'London', 'Ukraine', 'Cats', 'Dogs', 'Birds', 'Sharks', 'George Clone', 'will smith', 'Selena Gomez'];
-    var letsFindYouAgif = {
-        buttonsRendering: function() {
+    var topics = ['Texas', 'Paris', 'London', 'Ukraine', 'Cats', 'Dogs', 'Birds', 'Sharks', 'george clooney', 'will smith', 'Selena Gomez'];
+        // rendering buttons already in the topics array
+        function buttonsRendering() {
             $('#buttons-go-here').empty();
             for (var i = 0; i < topics.length; i++) {
                   var myBtn = $('<button>');
@@ -10,7 +10,33 @@ $(document).ready(function() {
                   myBtn.text(topics[i]);
                   $('#buttons-go-here').append(myBtn);
             }
-        }
-    }
-    letsFindYouAgif.buttonsRendering();
+        };
+        // onclick event when a topic clicked to return 10 gifs from Giphy
+        $('#buttons-go-here').on('click', '.button', function() {
+            var myTopic = $(this).attr('data-topic');
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + myTopic + "&api_key=dc6zaTOxFJmzC&limit=12";
+            console.log(queryURL);
+            $.ajax({
+                url: queryURL,
+                method: 'GET',
+            }).done(function(response) {
+                console.log(response);
+                $('#gifs-go-here').empty();
+                for (var i = 0; i < response.data.length; i++) {
+                    var topicDiv = $('<div>').addClass('col-sm-3')
+                    var p = $('<p>').text(response.data[i].rating);
+                    // importing the still url of the image
+                    var topicImg = $('<img>').attr('src', response.data[i].images.fixed_height_still.url);
+                    // set the gif status to still for toggling
+                    topicImg.attr('data-status', 'still');
+                    topicImg.addClass('imgToggle');
+                    topicImg.attr('width', '100%');
+                    topicDiv.append(p);
+                    topicDiv.append(topicImg);
+                    $('#gifs-go-here').append(topicDiv);
+                }
+            });
+        });
+    // rendering button onload
+    buttonsRendering();
 });
