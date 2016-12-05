@@ -13,6 +13,7 @@ $(document).ready(function() {
         };
         // onclick event when a topic clicked to return 10 gifs from Giphy
         $('#buttons-go-here').on('click', '.button', function() {
+            $('.gifs-well').text('Here is your order!')
             var myTopic = $(this).attr('data-topic');
             var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + myTopic + "&api_key=dc6zaTOxFJmzC&limit=12";
             console.log(queryURL);
@@ -26,8 +27,10 @@ $(document).ready(function() {
                     var topicDiv = $('<div>').addClass('col-sm-3 innerRows')
                     var p = $('<p>').text(response.data[i].rating);
                     // importing the still url of the image
-                    var topicImg = $('<img>').attr('src', response.data[i].images.fixed_height_still.url);
+                    var topicImg = $('<img>').attr('src', response.data[i].images.fixed_height_still.url)
                     // set the gif status to still for toggling
+                    topicImg.attr('data-still', response.data[i].images.fixed_height_still.url);
+                    topicImg.attr('data-animated', response.data[i].images.fixed_height.url);
                     topicImg.attr('data-status', 'still');
                     topicImg.addClass('imgToggle');
                     topicImg.attr('width', '100%');
@@ -37,6 +40,19 @@ $(document).ready(function() {
                 }
             });
         });
+        // function to play and pause the gif onclick
+        $('#gifs-go-here').on('click', '.imgToggle', function() {
+            // obtain the gis status (moving or still)
+            var state = $(this).attr('data-status');
+            // toggole the status between (moving to still)
+            if (state === 'still') {
+                $(this).attr('src', $(this).attr('data-animated'))
+                $(this).attr('data-status', 'animate');
+            } else {
+                $(this).attr('src', $(this).attr('data-still'))
+                $(this).attr('data-status', 'still');
+            }
+        })
     // rendering button onload
     buttonsRendering();
 });
