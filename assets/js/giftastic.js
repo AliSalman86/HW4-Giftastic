@@ -13,7 +13,7 @@ $(document).ready(function() {
         };
         // onclick event when a topic clicked to return 10 gifs from Giphy
         $('#buttons-go-here').on('click', '.button', function() {
-            $('.gifs-well').text('Here is your order!')
+            $('.gifs-well').text('Here is your order! click it to shake it!')
             var myTopic = $(this).attr('data-topic');
             var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + myTopic + "&api_key=dc6zaTOxFJmzC&limit=12";
             console.log(queryURL);
@@ -52,7 +52,15 @@ $(document).ready(function() {
                 $(this).attr('src', $(this).attr('data-still'))
                 $(this).attr('data-status', 'still');
             }
-        })
+        });
+        // onclick event listener and function to add anew topic from the input when the "add topic" button clicked
+        $('#topicSearch').on('click', function() {
+            $('#newTopic').empty();
+            var newTopic = $('#newTopic').val().trim();
+            topics.push(newTopic);
+            buttonsRendering();
+            return false;
+        });
     // rendering button onload
     buttonsRendering();
 });
