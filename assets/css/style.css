@@ -11,5 +11,18 @@
 }
 
 .innerRows {
-    height: 425px;
+    height: 450px;
+}
+
+.header {
+    background: url(../images/bg.jpg);
+}
+
+h1, h2 {
+    font-family: 'Monoton', cursive;
+    color: #fff !important;
+}
+
+span {
+    color: red;
 }

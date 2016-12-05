@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    var topics = ['Texas', 'Paris', 'London', 'Ukraine', 'Cats', 'Dogs', 'Birds', 'Sharks', 'george clooney', 'will smith', 'Selena Gomez'];
+    var limit = 0;
+    var topics = ['New York', 'Paris', 'London', 'Cats', 'Dogs', 'Birds', 'Sharks', 'george clooney', 'will smith', 'Selena Gomez', 'James Bond'];
         // rendering buttons already in the topics array
         function buttonsRendering() {
             $('#buttons-go-here').empty();
@@ -27,10 +28,10 @@ $(document).ready(function() {
                     var topicDiv = $('<div>').addClass('col-sm-3 innerRows')
                     var p = $('<p>').text(response.data[i].rating);
                     // importing the still url of the image
-                    var topicImg = $('<img>').attr('src', response.data[i].images.fixed_height_still.url)
+                    var topicImg = $('<img>').attr('src', response.data[i].images.original_still.url)
                     // set the gif status to still for toggling
-                    topicImg.attr('data-still', response.data[i].images.fixed_height_still.url);
-                    topicImg.attr('data-animated', response.data[i].images.fixed_height.url);
+                    topicImg.attr('data-still', response.data[i].images.original_still.url);
+                    topicImg.attr('data-animated', response.data[i].images.original.url);
                     topicImg.attr('data-status', 'still');
                     topicImg.addClass('imgToggle');
                     topicImg.attr('width', '100%');
